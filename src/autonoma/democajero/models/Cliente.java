@@ -6,7 +6,9 @@ package autonoma.democajero.models;
 
 /**
  *
- * @author USUARIO
+ * @author Heily Yohana Rios Ayala <heilyy.riosa@gmail.com>
+ * @since 20250430
+ * @version 1.0.0
  */
 public class Cliente {
     private String nombre;
