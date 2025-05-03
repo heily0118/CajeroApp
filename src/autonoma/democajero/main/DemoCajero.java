@@ -5,6 +5,7 @@
 package autonoma.democajero.main;
 
 import autonoma.democajero.models.Cajero;
+import autonoma.democajero.models.CajeroConcurrente;
 import autonoma.democajero.models.Cliente;
 
 /**
@@ -30,6 +31,9 @@ public class DemoCajero {
         
         cajero1.procesarCompra(cliente1, initialTime);
         cajero2.procesarCompra(cliente2, initialTime);
+        
+       Thread cajeroCon = new Thread(new CajeroConcurrente("cajero 1", new Cliente("Sara", new int[]{2,4,6,7}), initialTime));
+        cajeroCon.start();
         
     }
     

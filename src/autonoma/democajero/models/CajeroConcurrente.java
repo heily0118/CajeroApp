@@ -13,14 +13,15 @@ package autonoma.democajero.models;
 public class CajeroConcurrente extends Thread{
     private String nombre;
     private Cliente cliente;
-    private int cantidad;
+    private long timeStamp;
 
-    public CajeroConcurrente(String nombre, Cliente cliente) {
+    public CajeroConcurrente(String nombre, Cliente cliente, long timeStamp) {
         this.nombre = nombre;
         this.cliente = cliente;
-        this.cantidad = 4;
+        this.timeStamp= timeStamp;
     }
 
+   
     public Cliente getCliente() {
         return cliente;
     }
@@ -38,21 +39,49 @@ public class CajeroConcurrente extends Thread{
         this.nombre = nombre;
     }
 
+    public long getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(long timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+
+    
    @Override
     public void run(){
-        for (int i= 0; i<10; i++){
-            System.out.println("Hilo por herencia: " + i);
+        
+       System.out.println("El cajero " + this.nombre 
+        + " \nComienza a procesar la compra del cliente: " + this.cliente.getNombre()
+        + "\nEn el tiempo:" + (System.currentTimeMillis() - this.timeStamp)/1000 
+                + " Seg.");
+        
+        for (int i= 0; i<this.cliente.getCarroCompra().length; i++){
+         
+           
+            this.esperarXsegundos(this.cliente.getCarroCompra()[i]);
+            System.out.println("Procesado el producto " + (i + 1)
+            + " ---> Tiempo: " + (System.currentTimeMillis()- this.timeStamp)/1000
+            + " seg ");
+        
             
-            
-            try{
-                Thread.sleep(1000);
-                
-            }catch(InterruptedException e){
-                System.out.println("Hilo por herencia interrumpido");
-                
-            }
-        }
+           System.out.println("El cajero " + this.nombre + "Ha terminado de procesar" 
+                + this.cliente.getNombre()+ "\nEn el tiempo: "+
+        (System.currentTimeMillis() - this.timeStamp) /1000 + " seg");
+           
     
+        }
     }
+           
+    public void esperarXsegundos(int segundos){
+        try{
+            Thread.sleep(segundos * 1000);
+            
+        }catch(InterruptedException ex){
+            Thread.currentThread().interrupt();
+        }
+        
+    }
+    
     
 }
