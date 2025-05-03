@@ -51,26 +51,24 @@ public class CajeroConcurrente extends Thread{
    @Override
     public void run(){
         
-       System.out.println("El cajero " + this.nombre 
-        + " \nComienza a procesar la compra del cliente: " + this.cliente.getNombre()
-        + "\nEn el tiempo:" + (System.currentTimeMillis() - this.timeStamp)/1000 
-                + " Seg.");
-        
-        for (int i= 0; i<this.cliente.getCarroCompra().length; i++){
-         
-           
-            this.esperarXsegundos(this.cliente.getCarroCompra()[i]);
-            System.out.println("Procesado el producto " + (i + 1)
-            + " ---> Tiempo: " + (System.currentTimeMillis()- this.timeStamp)/1000
-            + " seg ");
-        
+        System.out.println("El cajero " + this.nombre 
+            + " \nComienza a procesar la compra del cliente: " + this.cliente.getNombre()
+            + "\nEn el tiempo: " + (System.currentTimeMillis() - this.timeStamp)/1000 
+            + " Seg.");
+
+        for (int i = 0; i < this.cliente.getCarroCompra().length; i++){
             
-           System.out.println("El cajero " + this.nombre + "Ha terminado de procesar" 
-                + this.cliente.getNombre()+ "\nEn el tiempo: "+
-        (System.currentTimeMillis() - this.timeStamp) /1000 + " seg");
+            this.esperarXsegundos(this.cliente.getCarroCompra()[i]);
            
-    
+            System.out.println("Procesado el producto " + (i + 1)+ " En en cajero: " + this.nombre
+                    + " ---> Tiempo: " + (System.currentTimeMillis() - this.timeStamp)/1000
+                    + " seg ");
         }
+
+     
+        System.out.println("El cajero " + this.nombre + " ha terminado de procesar la compra de "
+                + this.cliente.getNombre() + "\nEn el tiempo: " +
+                (System.currentTimeMillis() - this.timeStamp) / 1000 + " seg");
     }
            
     public void esperarXsegundos(int segundos){

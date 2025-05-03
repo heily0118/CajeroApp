@@ -21,8 +21,9 @@ public class DemoCajero {
      */
     public static void main(String[] args) {
        
-        Cliente cliente1 = new Cliente (" Cliente 1 ", new int []{2,2,1,5,2,3});
-        Cliente cliente2 = new Cliente (" Cliente 2 ", new int []{1,3,5,1,1});
+        Cliente cliente1 = new Cliente (" Sara ", new int []{2,2,1,5,2,3});
+        Cliente cliente2 = new Cliente (" Vanessa ", new int []{1,3,5,1,1});
+        Cliente cliente3 = new Cliente (" Pedro ", new int []{1,3,5,1,1});
         
         Cajero cajero1 = new Cajero (" Cajero 1 ");
         Cajero cajero2 = new Cajero (" Cajero 2 ");
@@ -32,8 +33,16 @@ public class DemoCajero {
         cajero1.procesarCompra(cliente1, initialTime);
         cajero2.procesarCompra(cliente2, initialTime);
         
-       Thread cajeroCon = new Thread(new CajeroConcurrente("cajero 1", new Cliente("Sara", new int[]{2,4,6,7}), initialTime));
-        cajeroCon.start();
+        Thread cajeroCon1 = new Thread(new CajeroConcurrente("Cajero 1", cliente1, initialTime));
+        Thread cajeroCon2 = new Thread(new CajeroConcurrente("Cajero 2", cliente2, initialTime));
+        Thread cajeroCon3 = new Thread(new CajeroConcurrente("Cajero 3", cliente3, initialTime));
+
+    
+        cajeroCon1.start();
+        cajeroCon2.start();
+        cajeroCon3.start();
+        
+         System.out.println("\n Los cajeros estan procesando las compras de los clientes.\n");
         
     }
     
